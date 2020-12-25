@@ -1,14 +1,11 @@
-from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from accounts.views import *
 
 urlpatterns = [
-    # path('', HomeView.as_view(),name='home'),
-    # path('todo/', login_required(ToDoView.as_view()),name='todo'),
-    # path('task/<int:pk>/', login_required(TaskDetailView.as_view()),name='task-detail'),
-
-
-    # path('', LoginView.as_view(template_name='login.html'),name='login'),
+    path('register/', RegisterView.as_view(),name='register'),
+    path('login/', LoginView.as_view(template_name='login.html'),name='login'),
+    path('logout/', LogoutView.as_view(),name='logout'),
+    
 
 ]
