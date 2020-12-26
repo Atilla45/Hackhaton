@@ -18,6 +18,18 @@ class ServiceView(generics.ListCreateAPIView):
         user = self.request.user
         return queryset.filter(user=user)
 
+
+
+
+    def post(self,request):
+        serializer = ServiceSerializer(data=request.data, files=request.FILE)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=request.data)
+
+
+
+
 class CategoryView(generics.ListAPIView):
     queryset=Category.objects.all()
     serializer_class=CategorySerializer
