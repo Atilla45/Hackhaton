@@ -8,7 +8,7 @@
 {% block html %}
 <div class="col-sm-6 col-sm-offset-3">
 
-  <h1>Processing an AJAX Form</h1>
+  <h1>Service</h1>
 
   <!-- OUR FORM -->
   <form action="#" method="POST">
@@ -22,16 +22,22 @@
       <!--DESCRIPTION-->
       <div id="name-group" class="form-group">
         <label for="name">description</label>
-        <input type="text" class="form-control" name="title" placeholder="description">
+        <input type="text" class="form-control" name="description" placeholder="description">
         <!-- errors will go here -->
       </div>
 
       <div class="form-group">
-        <label for="exampleFormControlFile1">Example file input</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        <label for="exampleFormControlFile1">File</label>
+        <input type="file" class="form-control-file">
       </div>
 
-      
+      <div class="form-group">
+        <label for="name">Category</label>
+        <select class="form-control">
+
+          <option style="display:none"  selected name='category' id="myData">Select Category</option>
+        </select>
+      </div>
 
       
       <button type="submit" class="btn btn-success">Submit <span class="fa fa-arrow-right"></span></button>
@@ -54,34 +60,62 @@
           // get the form data
           // there are many ways to get this data using jQuery (you can use the class or id also)
           var formData = {
-              'title'              : $('input[name=title]').val(),
-              'description'             : $('input[name=description]').val(),
-              'description'             : $('input[name=description]').val(),
-              'image'              : $('input[type=file]')[0].files[0],
+              'title'        : $('input[name=title]').val(),
+              'description'  : $('input[name=description]').val(),
+              'image'        : $('input[type=file]')[0].files[0],
+              'category'     : '1'
           };
-
+          console.log(formData);
           // process the form
           $.ajax({
-              type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
+              headers: { 
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' 
+              },
+              method        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
               url         : url,
               data        : formData, // our data object
-              dataType    : 'json', // what type of data do we expect back from the server
-                          encode          : true
-          })
-              // using the done promise callback
-              .done(function(data) {
+              contentType: "application/json; charset=utf-8",
+              // dataType    : 'json', // what type of data do we expect back from the server
+              // encode          : true,
+              success: function(data) {
+                console.log(data);
+              },
+              error: function(err){
+                alert(err)
+                console.log(err);
+                alert("NOOOOOOO")
+              },
+              contentType: false,
+              processData: false,
 
-                  // log data to the console so we can see
-                  console.log(data);
-
-                  // here we will handle errors and validation messages
-              });
-
-          // stop the form from submitting the normal way and refreshing the page
-          event.preventDefault();
-      });
+            })
+                 
+              event.preventDefault();
+          });
 
       });
     
+    </script>
+  <script>
+    url='http://127.0.0.1:8000/api/v1/category/'
+    fetch(url)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            var mainContainer = document.getElementById("myData");
+            
+            for (var i = 0; i < data.length; i++) {
+              $('select').append(`<option value=${data[i].id} >${data[i].title}</option>`)
+            }
+        }
   </script>
 {% endblock %}
+
