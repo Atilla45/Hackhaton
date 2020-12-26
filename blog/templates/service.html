@@ -56,7 +56,6 @@
 {% block js %}
   <script>
     url='http://127.0.0.1:8000/api/v1/category/'
-<<<<<<< HEAD
     fetch(url)
             .then(function (response) {
                 return response.json();
@@ -78,49 +77,6 @@
   <script>
 
     url='http://127.0.0.1:8000/api/v1/service/'
-=======
-    $.ajax({
-        url:url,
-        method: 'GET',
-        success : function(data){
-          for (var i = 0; i < data.length; i++) {
-              $('.category').append(`<option value=${data[i].id}>${data[i].title}</option>`)
-            }
-        },
-        error:function(err){
-          console.log(err);
-        }
-      })
-
-
-
-
-  </script>
-   <script>
-
-  $('.category').on('change', function() {
-    var category_id = $(this).val();
-    url=`http://127.0.0.1:8000/api/v1/skill/?category=${category_id}`
-    $.ajax({
-        url:url,
-        method: 'GET',
-        success : function(data){
-          for (var i = 0; i < data.length; i++) {
-              $('.skill').append(`<option value=${data[i].id}>${data[i].title}</option>`)
-            }
-        },
-        error:function(err){
-          console.log(err);
-        }
-      })
-  });
-    
-  </script>
-  
-  <script>
-
-    new_url='http://127.0.0.1:8000/api/v1/service/'
->>>>>>> atilla
     $(document).ready(function() {
      
       $('form').submit(function(event) {
@@ -133,28 +89,18 @@
           };
           console.log(formData);
           $.ajax({
-<<<<<<< HEAD
-            url:url,
-=======
             url:new_url,
->>>>>>> atilla
             method: 'POST',
             data:formData,
-            cache:false,
-            contentType: "application/json; charset=utf8",
-            processData: false,
-            headers: {
-              'Authorization': `Token ${localStorage.getItem('token')}`,
-            },
+            // cache:false,
+            // contentType: "application/json; charset=utf8",
+            // processData: false,
+            
             success: function(response){
                 alert('Mehsul yaradildi');
-                window.location = 'blog.html';
             },
             error: function(error_response){
-<<<<<<< HEAD
-=======
               console.log(error_response);
->>>>>>> atilla
               alert('Error bas verdi');
             }
             
