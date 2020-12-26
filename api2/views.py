@@ -24,7 +24,7 @@ class SkillViewSet(viewsets.ModelViewSet):
             pass
         
         return super(SkillViewSet, self).dispatch(request, *args, **kwargs)
-
+    
     # def dispatch(self,*args, **kwargs):
     #     print('yes')
     #     return super().dispatch(self, *args, **kwargs)

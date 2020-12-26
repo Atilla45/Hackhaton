@@ -33,9 +33,14 @@
 
       <div class="form-group">
         <label for="name">Category</label>
-        <select class="form-control data">
-
+        <select class="category">
           <option style="display:none" selected value=1 name='category'  id="myData">Select Category</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="name">Skill</label>
+        <select class="skill">
+          <option style="display:none" selected value=1 name='skill'  id="skillData">Select Skill</option>
         </select>
       </div>
 
@@ -51,6 +56,7 @@
 {% block js %}
   <script>
     url='http://127.0.0.1:8000/api/v1/category/'
+<<<<<<< HEAD
     fetch(url)
             .then(function (response) {
                 return response.json();
@@ -72,22 +78,66 @@
   <script>
 
     url='http://127.0.0.1:8000/api/v1/service/'
+=======
+    $.ajax({
+        url:url,
+        method: 'GET',
+        success : function(data){
+          for (var i = 0; i < data.length; i++) {
+              $('.category').append(`<option value=${data[i].id}>${data[i].title}</option>`)
+            }
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+
+
+
+
+  </script>
+   <script>
+
+  $('.category').on('change', function() {
+    var category_id = $(this).val();
+    url=`http://127.0.0.1:8000/api/v1/skill/?category=${category_id}`
+    $.ajax({
+        url:url,
+        method: 'GET',
+        success : function(data){
+          for (var i = 0; i < data.length; i++) {
+              $('.skill').append(`<option value=${data[i].id}>${data[i].title}</option>`)
+            }
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+  });
+    
+  </script>
+  
+  <script>
+
+    new_url='http://127.0.0.1:8000/api/v1/service/'
+>>>>>>> atilla
     $(document).ready(function() {
      
-      // process the form
       $('form').submit(function(event) {
-          // get the form data
-          // there are many ways to get this data using jQuery (you can use the class or id also)
           var formData = {
               'title'        : $('input[name=title]').val(),
               'description'  : $('input[name=description]').val(),
-              'image'        : $('input[type=file]')[0].files[0],
-              'category'     : $('select.data').val()
+              // 'image'        : $('input[type=file]')[0].files[0],
+              'category'     : $('select.category').val(),
+              'skill'     : $('select.skill').val()
           };
           console.log(formData);
-          // process the form
           $.ajax({
+<<<<<<< HEAD
             url:url,
+=======
+            url:new_url,
+>>>>>>> atilla
             method: 'POST',
             data:formData,
             cache:false,
@@ -101,6 +151,10 @@
                 window.location = 'blog.html';
             },
             error: function(error_response){
+<<<<<<< HEAD
+=======
+              console.log(error_response);
+>>>>>>> atilla
               alert('Error bas verdi');
             }
             

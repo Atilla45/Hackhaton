@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from django.contrib.auth.models import Permission
 from rest_framework.permissions import IsAuthenticated
 from home.models import Category
-
+from rest_framework.response import Response
 # Create your views here.
 class ServiceView(generics.ListCreateAPIView):
     queyset=Service.objects.all()
