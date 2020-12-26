@@ -6,6 +6,6 @@ from home.views import *
 
 urlpatterns = [
     path('', HomeView.as_view(),name='home'),
-    # path('', LoginView.as_view(template_name='login.html'),name='login'),
+    path('dashboard/', login_required(DashboardView.as_view()),name='dashboard'),
 
 ]

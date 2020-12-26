@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts',
     'blog',
     'api',
+    'api2',
 ]
 
 MIDDLEWARE = [

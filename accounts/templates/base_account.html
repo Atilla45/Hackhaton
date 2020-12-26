@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
+
+    {% block css2 %}
+    {% endblock %}
+{% endblock %}
+
+{% block html %}
+    <div class="header">
+        {% block html2 %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block js %}
+    {% block js2 %}
+    {% endblock %}
+{% endblock %}
