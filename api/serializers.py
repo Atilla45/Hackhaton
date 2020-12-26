@@ -12,8 +12,8 @@ class ServiceSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'category',
-            'image',
-            # 'skill',
+            # 'image',
+            'skill',
             # 'is_published',
             # 'is_active'
 

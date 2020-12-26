@@ -12,7 +12,7 @@ class Service(models.Model):
     title=models.CharField('Title',max_length=150,)
     description=models.TextField('Description', max_length=500)
     category= models.ForeignKey(Category,on_delete=models.CASCADE)
-    image=models.FileField()
+    image=models.ImageField()
     skill=models.ForeignKey(Skill,on_delete=models.CASCADE)
     is_published= models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
