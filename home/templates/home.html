@@ -1,14 +1,106 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+
 
 {% endblock %}
 
 {% block html %}
+<div class="background_blur">
+    <div id="pop_up_1" class="pop_up">
+        <div class="flex-end">
+            <i class="fas fa-times icon-soft close_pop"></i>
+        </div>
+        <div class="flex-column align-center"> 
+            <h2>What do you looking for</h2>
+            <p>Freelancer olarak iş mi arıyorsun yoksa yetenekli, tecrübeli ve yaratıcı freelancer’lara mı ihtiyacın var?</p>
+            <div class="space-between">
+                <div key='1' class="pop_up_option op_up_option_left">
+                    <img class="pop_up_svg" src="{% static 'svg/customer.svg' %}" alt="">
+                    <p class="pop_up_p">Customer</p>
+                </div>
+                <div key='2' class="pop_up_option op_up_option_right">
+                    <img class="pop_up_svg" src="{% static 'svg/freelancer.svg' %}" alt="">
+                    <p class="">Freelancer</p>
+                </div>
+            </div>
+            <button id="pop_up_select_button" class='start_disabled'>Next</button>
+        </div>
+    </div>
+    <div id="pop_up_customer pop_up_closed" class="pop_up">
+        <div class="flex-end">
+            <i class="fas fa-times icon-soft close_pop"></i>
+        </div>
+        <div class="flex-column align-center"> 
+            <h2>Ne tür bir işe ihtiyacın var?</h2>
+            <p>Freelancer olarak iş mi arıyorsun yoksa yetenekli, tecrübeli ve yaratıcı freelancer’lara mı ihtiyacın var?</p>
+            <div class="space-between">
+                <div key='1' class="pop_up_option op_up_option_left">
+                    <img class="pop_up_svg" src="{% static 'svg/customer.svg' %}" alt="">
+                    <p class="pop_up_p">Customer</p>
+                </div>
+                <div key='2' class="pop_up_option op_up_option_right">
+                    <img class="pop_up_svg" src="{% static 'svg/freelancer.svg' %}" alt="">
+                    <p class="">Freelancer</p>
+                </div>
+            </div>
+            <button id="pop_up_select_button" class='start_disabled'>Next</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="header">
+    <h1>Hire the best freelancers for any job, online</h1>
+    <p>It is a libertarian work platform that operates on a community basis where talented freelancers meet with businesses and initiatives suitable for them</p>
+    <button id="open_pop" class="start">Get started</button>
+</div>
 {% endblock %}
 
 {% block js %}
     <script>
+        var key
+        $('.pop_up_option').on('click',function(){
+            key=$(this).attr('key')
+            $('.pop_up_option').removeClass('pop_up_option_selected')
+            $('.pop_up_option').addClass('pop_up_option')
+            $(this).addClass('pop_up_option_selected')
+            p_tag=$(this).find('p:first')
+            $('.pop_up_option p').removeClass('pop_up_p_selected')
+            p_tag.addClass('pop_up_p_selected')
 
+            if ($('#pop_up_select_button').hasClass('start_disabled')){
+                $('#pop_up_select_button').addClass('start')
+                $('#pop_up_select_button').removeClass('start_disabled')
+                $('#pop_up_select_button').on('click',function(){next_1()})
+            } 
+            
+            
+        })
+
+
+        // NEXT button
+        function open_pop(){
+            $('.background_blur').addClass('background_blur_opened')
+        }
+        function close_pop(){
+            $('.background_blur').removeClass('background_blur_opened')
+        }
+        $('#open_pop').on('click',function(){open_pop()})
+        $('.close_pop').on('click',function(){close_pop()})
+
+        
+
+        function next_1(){
+            $('#pop_up_1').addClass('pop_up_closed')
+            if(key==1){
+                $('#pop_up_customer').removeClass('pop_up_closed')
+            }
+            else{
+
+            }
+        }
     </script>
 {% endblock %}

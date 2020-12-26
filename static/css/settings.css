@@ -28,6 +28,10 @@
     display: flex;
     justify-content: flex-end;
 }
+.justify-center{
+    display: flex;
+    justify-content: center;
+}
 
 
 .flex-end-column{

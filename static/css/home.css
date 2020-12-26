@@ -1,0 +1,107 @@
+body{
+    background-color: var(--content_color);
+}
+
+.header{
+    width: 100%;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 70px;
+    box-sizing: border-box;
+}
+.header .start{
+    margin: 25px 0;
+}
+.header > h1,h2,p{
+    text-align: center;
+    line-height: 30px;
+}
+.header > p{
+    color: var(--font-color-soft);    
+}
+
+/*  */
+
+.background_blur{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color:rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    transition: visibility,opacity;
+    transition-duration: var(--transition-duration);
+    opacity: 0;
+    visibility: hidden;
+}
+.background_blur_opened{
+    visibility: visible;
+    opacity: 1;
+}
+.pop_up{
+    position: absolute;
+    width: min-content;
+    max-width: 100%;
+    height: auto;
+    padding: 60px;
+    background-color:var(--content_color);
+    border-radius:3px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+    transition: visibility,opacity;
+    transition-duration: var(--transition-duration);
+}
+.pop_up_closed{
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+.pop_up_option, .pop_up_option_selected{
+    border:1px solid transparent;
+    cursor: pointer;
+    transition: border-color;
+    transition-duration:var(--transition-duration) ;
+    padding:5px 35px;
+    border-radius:20px;
+    margin: 15px 35px;
+}
+/* .pop_up_option_left{
+    margin-right: 20px;
+}
+.pop_up_option_right{
+    margin-left: 20px;
+
+} */
+.pop_up_option:hover{
+    border-color:var(--main-color2);
+}
+.pop_up_option_selected{
+    border-color:var(--main-color2);
+
+}
+.pop_up_option > p{
+    transition: color;
+    transition-duration:var(--transition-duration) ;
+    margin-top: 10px;
+}
+.pop_up_option:hover > p{
+    color:var(--font-color);
+}
+.pop_up_p_selected{
+    color:var(--font-color);
+}
+.pop_up_svg{
+    width: 150px;
+    height: 150px;
+}
+.pop_up button{
+    margin-top: 25px;
+    margin-bottom: 0px;
+}

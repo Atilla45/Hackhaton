@@ -1,25 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'base_account.html' %}
 
-{% block css %}
+{% block css2 %}
 
 {% endblock %}
 
-{% block html %}
-    <form action="" method="POST">
+{% block html2 %}
+    <form class="form" action="" method="POST"> 
         {% csrf_token %}
+
         {% for field in form %}
-            <div class="flex-column">
-                {{field.label}} 
+            <div class="form-group">
+                <!-- <label for="exampleInputEmail1">{{field.label}}</label> -->
                 {{field}}
-                {{field.errors}}    
+                <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> -->
+                {% for error in field.errors %}
+                    <small class="error_msg">{{error}}</small>
+                {% endfor %}
             </div>
         {% endfor %}
-        <button type="submit">SUBMIT</button>
+        
+        <button type="submit" class="start">Submit</button>
     </form>
-    <a href="/account/login">Register</a>
 {% endblock %}
 
-{% block js %}
+{% block js2 %}
     <script>
 
     </script>
