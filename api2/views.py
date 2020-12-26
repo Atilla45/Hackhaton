@@ -14,7 +14,7 @@ from blog.models import Skill, Category
 class SkillViewSet(viewsets.ModelViewSet):
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
-    http_method_names = ['GET']
+    http_method_names = ['get']
 
     def dispatch(self, request, *args, **kwargs):
         try:
