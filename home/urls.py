@@ -7,5 +7,7 @@ from home.views import *
 urlpatterns = [
     path('', HomeView.as_view(),name='home'),
     path('dashboard/', login_required(DashboardView.as_view()),name='dashboard'),
+    path('search/', login_required(SearchView.as_view()),name='search'),
+
 
 ]

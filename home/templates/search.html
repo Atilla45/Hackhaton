@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+
+
+
+{% endblock %}
+
+{% block html %}
+<div class="search_header">
+    <h2>Senin için en iyi ilan ve freelancer’ları bulduk!</h2>
+    <select name="" id="">
+        <option selected style="display: none;" value="">Select a category</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.title }}</option>
+        {% endfor %}
+    </select>
+    <select name="" id="">
+        <option selected style="display: none;" value="">Select a category</option>
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.title }}</option>
+        {% endfor %}
+    </select>
+</div>
+{% endblock %}
+
+{% block js %}
+    
+{% endblock %}
+
+
