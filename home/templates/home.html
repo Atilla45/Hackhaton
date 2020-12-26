@@ -29,7 +29,7 @@
             <button id="pop_up_select_button" class='start_disabled'>Next</button>
         </div>
     </div>
-    <div id="pop_up_customer pop_up_closed" class="pop_up">
+    <div id="pop_up_customer" class="pop_up">
         <div class="flex-end">
             <i class="fas fa-times icon-soft close_pop"></i>
         </div>
@@ -83,6 +83,7 @@
 
         // NEXT button
         function open_pop(){
+            // alert("YES")
             $('.background_blur').addClass('background_blur_opened')
         }
         function close_pop(){
@@ -94,9 +95,9 @@
         
 
         function next_1(){
-            $('#pop_up_1').addClass('pop_up_closed')
+            $('#pop_up_1').removeClass('pop_up_selected')
             if(key==1){
-                $('#pop_up_customer').removeClass('pop_up_closed')
+                $('#pop_up_customer').addClass('pop_up_selected')
             }
             else{
 

@@ -11,5 +11,5 @@ class CustomUser(AbstractUser):
 
   objects=UserManager()
   def __str__(self):
-      return f'{self.username}'
+    return f'{self.username}'
 
