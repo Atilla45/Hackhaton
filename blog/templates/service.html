@@ -67,16 +67,35 @@
                 console.log('error: ' + err);
             });
           function appendData(data) {
-            var mainContainer = document.getElementById("myData");
-            
             for (var i = 0; i < data.length; i++) {
-              $('select').append(`<option value=${data[i].id} >${data[i].title}</option>`)
+              $('.category').append(`<option value=${data[i].id} >${data[i].title}</option>`)
             }
           }
   </script>
+   <script>
+
+  $('.category').on('change', function() {
+    var category_id = $(this).val();
+    url=`http://127.0.0.1:8000/api/v1/skill/?category=${category_id}`
+    $.ajax({
+        url:url,
+        method: 'GET',
+        success : function(data){
+          for (var i = 0; i < data.length; i++) {
+              $('.skill').append(`<option value=${data[i].id}>${data[i].title}</option>`)
+            }
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
+  });
+    
+  </script>
+  
   <script>
 
-    url='http://127.0.0.1:8000/api/v1/service/'
+    new_url='http://127.0.0.1:8000/api/v1/service/'
     $(document).ready(function() {
      
       $('form').submit(function(event) {
@@ -92,12 +111,13 @@
             url:new_url,
             method: 'POST',
             data:formData,
-            // cache:false,
-            // contentType: "application/json; charset=utf8",
-            // processData: false,
-            
+            contentType: "application/json;",
+            headers:{
+                'X-CSRFToken': token,
+              },
             success: function(response){
                 alert('Mehsul yaradildi');
+                window.location = 'blog.html';
             },
             error: function(error_response){
               console.log(error_response);
