@@ -1,5 +1,5 @@
 :root{
-    --background_color:rgb(231, 231, 231);
+    --background_color:rgb(243, 243, 243);
     --content_color:rgb(255, 255, 255);
     --font-color:rgb(0, 0, 0);
     --font-color-soft:#4b4f52;
@@ -15,7 +15,7 @@
 
 }
 body{
-    background-color: var(--content_color);
+    background-color: var(--background_color);
     height: 1500px;
     padding: 0;
     margin: 0;
@@ -36,9 +36,10 @@ h2{
 p{
     font-size: 16px;
     font-weight: 500;
-    color:var(--font-color-soft)
+    color:var(--font-color-soft);
+    margin: 10px 0;
 }
-input{
+input,select{
     font-size: 16px;
     padding: 10px 15px;
     border-radius:3px;
@@ -48,6 +49,10 @@ input{
     transition-duration: var(--transition-duration);
     outline: none;
     margin: 5px 0;
+    background-color: var(--content_color);
+}
+select{
+    width: fit-content;
 }
 input::placeholder{
     color:var(--soft-color);

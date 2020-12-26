@@ -10,18 +10,44 @@
 {% block html %}
 <div class="search_header">
     <h2>Senin için en iyi ilan ve freelancer’ları bulduk!</h2>
-    <select name="" id="">
-        <option selected style="display: none;" value="">Select a category</option>
-        {% for category in categories %}
-            <option value="{{ category.id }}">{{ category.title }}</option>
-        {% endfor %}
-    </select>
-    <select name="" id="">
-        <option selected style="display: none;" value="">Select a category</option>
-        {% for category in categories %}
-            <option value="{{ category.id }}">{{ category.title }}</option>
-        {% endfor %}
-    </select>
+    <input class="search" type="text" name="" id="">
+    <div class="align-center">
+        <div class="flex-column search_select_con">
+            <p>Select category</p>
+            <select name="" id="">
+                <option selected value="">All</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="flex-column search_select_con">
+            <p>Select subcategory</p>
+            <select name="" id="">
+                <option selected value="">All</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
+<div class="search_results">
+    <div class="card">
+        asd
+    </div>
+    <div class="card">
+        asd
+    </div>
+    <div class="card">
+        asd
+    </div>
+    <div class="card">
+        asd
+    </div>
+    <div class="card">
+        asd
+    </div>
 </div>
 {% endblock %}
 

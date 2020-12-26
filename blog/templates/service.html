@@ -56,29 +56,6 @@
 {% block js %}
   <script>
     url='http://127.0.0.1:8000/api/v1/category/'
-<<<<<<< HEAD
-    fetch(url)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (data) {
-                appendData(data);
-            })
-            .catch(function (err) {
-                console.log('error: ' + err);
-            });
-          function appendData(data) {
-            var mainContainer = document.getElementById("myData");
-            
-            for (var i = 0; i < data.length; i++) {
-              $('select').append(`<option value=${data[i].id} >${data[i].title}</option>`)
-            }
-          }
-  </script>
-  <script>
-
-    url='http://127.0.0.1:8000/api/v1/service/'
-=======
     $.ajax({
         url:url,
         method: 'GET',
@@ -118,12 +95,12 @@
   </script>
   
   <script>
-
+    var token='{{csrf_token}}'
     new_url='http://127.0.0.1:8000/api/v1/service/'
->>>>>>> atilla
     $(document).ready(function() {
      
       $('form').submit(function(event) {
+          alert("YES")
           var formData = {
               'title'        : $('input[name=title]').val(),
               'description'  : $('input[name=description]').val(),
@@ -133,34 +110,42 @@
           };
           console.log(formData);
           $.ajax({
-<<<<<<< HEAD
-            url:url,
-=======
-            url:new_url,
->>>>>>> atilla
+            url:'http://127.0.0.1:8000/api/v1/service/',
             method: 'POST',
+            headers:{
+              'X-CSRFToken': token,
+            },
             data:formData,
-            cache:false,
-            contentType: "application/json; charset=utf8",
-            processData: false,
-            headers: {
-              'Authorization': `Token ${localStorage.getItem('token')}`,
+            success : function(data){
+              alert("YESSSSSSSSSSS")
+              console.log(data);
             },
-            success: function(response){
-                alert('Mehsul yaradildi');
-                window.location = 'blog.html';
-            },
-            error: function(error_response){
-<<<<<<< HEAD
-=======
-              console.log(error_response);
->>>>>>> atilla
-              alert('Error bas verdi');
+            error:function(err){
+              console.log(err);
             }
-            
           })
+          // $.ajax({
+          //   url:new_url,
+          //   method: 'POST',
+          //   data:formData,
+          //   cache:false,
+          //   contentType: "application/json; charset=utf8",
+          //   processData: false,
+          //   headers: {
+          //     'Authorization': `Token ${localStorage.getItem('token')}`,
+          //   },
+          //   success: function(response){
+          //       alert('Mehsul yaradildi');
+          //       window.location = 'blog.html';
+          //   },
+          //   error: function(error_response){
+          //     console.log(error_response);
+          //     alert('Error bas verdi');
+          //   }
+            
+          // })
                  
-            event.preventDefault();
+          event.preventDefault();
         });
 
       });

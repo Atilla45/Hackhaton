@@ -28,3 +28,4 @@ class SearchView(ListView):
         context['categories']=Category.objects.all().values()
         print(context)
         return context
+

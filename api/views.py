@@ -13,7 +13,7 @@ from home.models import Category
 from rest_framework.response import Response
 # Create your views here.
 class ServiceView(generics.ListCreateAPIView):
-    queyset=Service.objects.all()
+    queryset=Service.objects.all()
     serializer_class=ServiceSerializer
     permission_classes = (IsAuthenticated,)
                 
