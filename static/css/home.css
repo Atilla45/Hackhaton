@@ -107,3 +107,57 @@ body{
     margin-top: 25px;
     margin-bottom: 0px;
 }
+/* POP UP 2 */
+#pop_up_customer, #pop_up_skill{
+    width: 600px;
+}
+.category_card{
+    background-color: var(--content_color);
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--soft-color);
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    cursor: pointer;
+
+    transition: border-color;
+    transition-duration: var(--transition-duration);
+}
+.category_card_selected{
+    border-color: var(--main-color2);
+}
+/*POP UP 3 SKILL */
+.skill_con{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.skill_card{
+    box-sizing: border-box;
+    background-color: var(--content_color);
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--soft-color);
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    cursor: pointer;
+
+    transition: border-color;
+    transition-duration: var(--transition-duration);
+}
+.skill_card_selected{
+    border-color: var(--main-color2);
+}
+#pop_up_account{
+    width: 500px;
+}
+.account_buttons_con{
+    margin-top: 20px 0;
+}
+.account_buttons_con .start,.account_buttons_con  .next{
+    margin: 10px 60px;
+
+}

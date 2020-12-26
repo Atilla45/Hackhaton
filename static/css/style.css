@@ -98,6 +98,8 @@ input:focus{
     font-weight: 500;
     margin: 0;
     outline: none;
+    width: fit-content;
+
 
 }
 .next:hover{
@@ -152,3 +154,4 @@ input:focus{
 .icon-soft:hover{
     color: var(--font-color);
 }
+

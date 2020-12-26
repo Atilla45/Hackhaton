@@ -36,6 +36,21 @@
         </div>
         <div class="flex-column align-center"> 
             <h2>Ne tür bir işe ihtiyacın var?</h2>
+            <p>İhtiyacın olan iş hangi ana kategoriye giriyor? Seçimini yap ve devam et!</p>
+            {% for category in categories %}
+                <div class="category_card" value='{{category.id}}' >
+                    <p>{{category.title}}</p>
+                </div>
+            {% endfor %}
+            <button id="pop_up_select_category" class='start_disabled'>Next</button>
+        </div>
+    </div>
+    <div id="pop_up_freelancer" class="pop_up">
+        <div class="flex-end">
+            <i class="fas fa-times icon-soft close_pop"></i>
+        </div>
+        <div class="flex-column align-center"> 
+            <h2>Ne tür bir işe ihtiyacın var?</h2>
             <p>Freelancer olarak iş mi arıyorsun yoksa yetenekli, tecrübeli ve yaratıcı freelancer’lara mı ihtiyacın var?</p>
             <div class="space-between">
                 <div key='1' class="pop_up_option op_up_option_left">
@@ -50,11 +65,39 @@
             <button id="pop_up_select_button" class='start_disabled'>Next</button>
         </div>
     </div>
+    <div id="pop_up_skill" class="pop_up">
+        <div class="flex-end">
+            <i class="fas fa-times icon-soft close_pop"></i>
+        </div>
+        <div class="flex-column align-center"> 
+            <h2>Ne tür bir işe ihtiyacın var?</h2>
+            <p>İhtiyacın olan iş hangi ana kategoriye giriyor? Seçimini yap ve devam et!</p>
+            <div class="skill_con flex-column">
+            </div>
+            <button id="pop_up_select_skill" class='start_disabled'>Next</button>
+        </div>
+    </div>
+    <div id="pop_up_account" class="pop_up">
+        <div class="flex-end">
+            <i class="fas fa-times icon-soft close_pop"></i>
+        </div>
+        <div class="flex-column align-center"> 
+            <h2>Join us</h2>
+            <p>Before taking a look at the freelancers we have chosen for you, you must login or register by creating your profile</p>
+            <div class="space-between account_buttons_con">
+                <a href="{% url 'register' %}" class="start sign_up">Sign up</a>
+                <p>or</p>
+                <a href="{% url 'login' %}" class="next login">Login</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="header">
     <h1>Hire the best freelancers for any job, online</h1>
+    
+
     <p>It is a libertarian work platform that operates on a community basis where talented freelancers meet with businesses and initiatives suitable for them</p>
     <button id="open_pop" class="start">Get started</button>
 </div>
@@ -63,6 +106,8 @@
 {% block js %}
     <script>
         var key
+        var category_id
+        var token='{{csrf_token}}'
         $('.pop_up_option').on('click',function(){
             key=$(this).attr('key')
             $('.pop_up_option').removeClass('pop_up_option_selected')
@@ -77,35 +122,128 @@
                 $('#pop_up_select_button').removeClass('start_disabled')
                 $('#pop_up_select_button').on('click',function(){next_1()})
             } 
-            
-            
         })
+
+        // Category options
+        $('.category_card').on('click',function(){
+            category_id=$(this).attr('value')
+            $('.category_card').removeClass('category_card_selected')
+            // $('.category_card').addClass('pop_up_option')
+            $(this).addClass('category_card_selected')
+
+            // p_tag=$(this).find('p:first')
+            // $('.pop_up_option p').removeClass('pop_up_p_selected')
+            // p_tag.addClass('pop_up_p_selected')
+
+            if ($('#pop_up_select_category').hasClass('start_disabled')){
+                $('#pop_up_select_category').addClass('start')
+                $('#pop_up_select_category').removeClass('start_disabled')
+                $('#pop_up_select_category').on('click',function(){next_2()})
+            } 
+        })
+        // Skill options
+        function skill_card(e){
+            skill_id=$(e).attr('value')
+            $('.skill_card').removeClass('skill_card_selected')
+            // $('.category_card').addClass('pop_up_option')
+            $(e).addClass('skill_card_selected')
+
+            // p_tag=$(this).find('p:first')
+            // $('.pop_up_option p').removeClass('pop_up_p_selected')
+            // p_tag.addClass('pop_up_p_selected')
+
+            if ($('#pop_up_select_skill').hasClass('start_disabled')){
+                $('#pop_up_select_skill').addClass('start')
+                $('#pop_up_select_skill').removeClass('start_disabled')
+                $('#pop_up_select_skill').on('click',function(){next_3()})
+            } 
+        }
+
+
+
 
 
         // NEXT button
         function open_pop(){
             // alert("YES")
             $('.background_blur').addClass('background_blur_opened')
+            $('#pop_up_1').addClass('pop_up_selected')
         }
         function close_pop(){
             $('.background_blur').removeClass('background_blur_opened')
+            $('.pop_up').removeClass('pop_up_selected')
+
         }
         $('#open_pop').on('click',function(){open_pop()})
         $('.close_pop').on('click',function(){close_pop()})
 
         
 
+        
         function next_1(){
-            $('#pop_up_1').removeClass('pop_up_selected')
+            $('.pop_up').removeClass('pop_up_selected')
             if(key==1){
                 $('#pop_up_customer').addClass('pop_up_selected')
             }
             else{
-
+                $('#pop_up_freelancer').addClass('pop_up_selected')
             }
         }
+
+        function next_2(){
+            $.ajax({
+                method : 'GET',
+                url: `http://127.0.0.1:8000/api/v1/skill/?category=${category_id}`, 
+                headers:{
+                    'X-CSRFToken': token,
+                },
+                success : function(object){
+                    console.log(object);
+                    for(var i in object){
+                        skill_id=object[i]['id']
+                        skill_title=object[i]['title']
+                        $('.skill_con').html('')
+                        $('.skill_con').append(`<div onclick='skill_card(e=this)' class="skill_card" value='${skill_id}' >
+                                                    <p>${skill_title}</p>
+                                                </div>  `)
+                    }
+                    
+                    // document.querySelector('.tasks').innerHTML+=`<p class="task" value='${object.title}' id="${object.id}" created_at='${object.created_at}' onclick="open_bar('${object.id}',this)" type="text">${object.title}</p>`
+                },
+                error:function(e){
+                    console.log(e);
+                }
+
+            })
+            $('.pop_up').removeClass('pop_up_selected')
+            $('#pop_up_skill').addClass('pop_up_selected')
+
+        }
+    
+        function next_3(){
+            href=$('.sign_up').attr('href')
+            next=`?next=search&category_id=${skill_id}&skill_id=${skill_id}`
+            href=href+next
+            $('.sign_up').attr('href',href)
+
+            href=$('.login').attr('href')
+            href=href+next
+            $('.login').attr('href',href)
+
+
+            console.log(href);
+            $('.pop_up').removeClass('pop_up_selected')
+            $('#pop_up_account').addClass('pop_up_selected')
+
+        }
     </script>
+<<<<<<< HEAD
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
 {% endblock %}
+=======
+{% endblock %}
+
+
+>>>>>>> 39e33eceb48f533d2737e0aee9e7a882358f9f38
