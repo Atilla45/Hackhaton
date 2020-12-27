@@ -8,7 +8,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         model=Service
         fields=[
             'id',
-            'user',
+            # 'user',
             'title',
             'description',
             'category',
@@ -18,7 +18,11 @@ class ServiceSerializer(serializers.ModelSerializer):
             # 'is_active'
 
         ]
-
+        
+    def validate(self, data):
+        request = self.context.get('request')
+        data['user'] = request.user
+        return super().validate(data)
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

@@ -97,8 +97,8 @@
 
     new_url='http://127.0.0.1:8000/api/v1/service/'
     $(document).ready(function() {
-     
       $('form').submit(function(event) {
+          var token='{{csrf_token}}'
           var formData = {
               'title'        : $('input[name=title]').val(),
               'description'  : $('input[name=description]').val(),
@@ -111,9 +111,13 @@
             url:new_url,
             method: 'POST',
             data:formData,
+            dataType:"json",
             contentType: "application/json;",
             headers:{
                 'X-CSRFToken': token,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+
               },
             success: function(response){
                 alert('Mehsul yaradildi');
@@ -122,7 +126,9 @@
             error: function(error_response){
               console.log(error_response);
               alert('Error bas verdi');
-            }
+            },
+            processData: false, 
+            contentType: false 
             
           })
                  
