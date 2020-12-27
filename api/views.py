@@ -11,7 +11,7 @@ from django.contrib.auth.models import Permission
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from home.models import Category
-from rest_framework.parsers import MultiPartParser
+# from rest_framework.parsers import MultiPartParser
 from rest_framework import mixins, generics
 from rest_framework.response import Response
 # Create your views here.
@@ -20,14 +20,8 @@ class ServiceView(generics.ListCreateAPIView,mixins.CreateModelMixin):
     serializer_class=ServiceSerializer
     permission_classes = (IsAuthenticated,)
 
-    parser_classes = (MultiPartParser,)
 
-    def post(self, request, format=None):
-        # to access files
-        print(request.FILES)
-        # to access data
-        print(request.data) 
-        return Response({'received data': request.data})
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -36,7 +30,12 @@ class ServiceView(generics.ListCreateAPIView,mixins.CreateModelMixin):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-
+    # def post(self, request, format=None):
+    #     # to access files
+    #     print(request.FILES)
+    #     # to access data
+    #     print(request.data) 
+    #     return Response({'received data': request.data})
 
     # def post(self,request):
     #     serializer = ServiceSerializer(data=request.data)

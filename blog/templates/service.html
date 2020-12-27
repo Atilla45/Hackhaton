@@ -112,12 +112,9 @@
             method: 'POST',
             data:formData,
             dataType:"json",
-            contentType: "application/json;",
+            
             headers:{
                 'X-CSRFToken': token,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-
               },
             success: function(response){
                 alert('Mehsul yaradildi');
@@ -127,8 +124,7 @@
               console.log(error_response);
               alert('Error bas verdi');
             },
-            processData: false, 
-            contentType: false 
+           
             
           })
                  
